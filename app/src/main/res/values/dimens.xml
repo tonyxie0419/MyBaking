@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="recipe_item_height">200dp</dimen>
+    <dimen name="recipe_item_margin">16dp</dimen>
+
+    <dimen name="recipe_detail_item_margin">8dp</dimen>
+    <dimen name="recipe_detail_item_padding">8dp</dimen>
+    <dimen name="recipe_detail_item_text_size">24sp</dimen>
+
+    <dimen name="recipe_ingredients_item_text_size">16sp</dimen>
+
+    <dimen name="recipe_item_text_size">28sp</dimen>
+    <dimen name="progressbar">42dp</dimen>
+
+    <dimen name="tv_margin_left">8dp</dimen>
+    <dimen name="tv_margin_top">8dp</dimen>
+    <dimen name="tv_margin_right">8dp</dimen>
+    <dimen name="tv_margin_bottom">8dp</dimen>
+</resources>

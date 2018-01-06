@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_quantity"
+        style="@style/IngredientsItem"
+        android:layout_marginLeft="@dimen/tv_margin_left"
+        android:layout_marginStart="@dimen/tv_margin_left"
+        android:layout_marginTop="@dimen/tv_margin_top"
+        android:text="@string/recipe_ingredients_quantity"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_quantity_display"
+        style="@style/IngredientsItem"
+        android:layout_marginEnd="@dimen/tv_margin_right"
+        android:layout_marginLeft="@dimen/tv_margin_left"
+        android:layout_marginRight="@dimen/tv_margin_right"
+        android:layout_marginStart="@dimen/tv_margin_left"
+        app:layout_constraintLeft_toRightOf="@+id/tv_quantity"
+        app:layout_constraintTop_toTopOf="@+id/tv_quantity"
+        tools:text="@string/recipe_ingredients_quantity_default" />
+
+    <TextView
+        android:id="@+id/tv_measure"
+        style="@style/IngredientsItem"
+        android:layout_marginLeft="@dimen/tv_margin_left"
+        android:layout_marginStart="@dimen/tv_margin_left"
+        android:layout_marginTop="@dimen/tv_margin_top"
+        android:text="@string/recipe_ingredients_measure"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_quantity" />
+
+    <TextView
+        android:id="@+id/tv_measure_display"
+        style="@style/IngredientsItem"
+        android:layout_marginEnd="@dimen/tv_margin_right"
+        android:layout_marginLeft="@dimen/tv_margin_left"
+        android:layout_marginRight="@dimen/tv_margin_right"
+        android:layout_marginStart="@dimen/tv_margin_left"
+        app:layout_constraintLeft_toRightOf="@+id/tv_measure"
+        app:layout_constraintTop_toTopOf="@+id/tv_measure"
+        tools:text="@string/recipe_ingredients_measure_default" />
+
+    <TextView
+        android:id="@+id/tv_ingredient"
+        style="@style/IngredientsItem"
+        android:layout_marginLeft="@dimen/tv_margin_left"
+        android:layout_marginStart="@dimen/tv_margin_left"
+        android:layout_marginTop="@dimen/tv_margin_top"
+        android:text="@string/recipe_ingredients_ingredient"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_measure" />
+
+    <TextView
+        android:id="@+id/tv_ingredient_display"
+        style="@style/IngredientsItem"
+        android:layout_marginBottom="@dimen/tv_margin_bottom"
+        android:layout_marginEnd="@dimen/tv_margin_right"
+        android:layout_marginLeft="@dimen/tv_margin_left"
+        android:layout_marginRight="@dimen/tv_margin_right"
+        android:layout_marginStart="@dimen/tv_margin_left"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tv_ingredient"
+        app:layout_constraintTop_toTopOf="@+id/tv_ingredient"
+        tools:text="@string/recipe_ingredients_ingredient_default" />
+
+</android.support.constraint.ConstraintLayout>
