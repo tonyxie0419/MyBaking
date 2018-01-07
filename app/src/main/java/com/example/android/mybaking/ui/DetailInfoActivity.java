@@ -48,7 +48,11 @@ public class DetailInfoActivity extends AppCompatActivity implements View.OnClic
         if (bundle != null) {
             ingredients = bundle.getParcelableArrayList(RecipeDetailAdapter.TRANS_INGREDIENTS);
             steps = bundle.getParcelableArrayList(RecipeDetailAdapter.TRANS_STEPS);
-            stepIndex = bundle.getInt(RecipeDetailAdapter.TRANS_STEP_INDEX);
+            if (savedInstanceState != null) {
+                stepIndex = savedInstanceState.getInt("stepIndex");
+            } else {
+                stepIndex = bundle.getInt(RecipeDetailAdapter.TRANS_STEP_INDEX);
+            }
             recipeName = bundle.getString(RecipeDetailAdapter.TRANS_RECIPE_NAME);
             if (actionBar != null) {
                 actionBar.setTitle(recipeName);
@@ -75,6 +79,7 @@ public class DetailInfoActivity extends AppCompatActivity implements View.OnClic
 
         btnPre.setOnClickListener(this);
         btnNext.setOnClickListener(this);
+
     }
 
     @Override
@@ -103,5 +108,11 @@ public class DetailInfoActivity extends AppCompatActivity implements View.OnClic
                 }
                 break;
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("stepIndex", stepIndex);
     }
 }

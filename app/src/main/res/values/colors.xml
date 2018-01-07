@@ -5,4 +5,5 @@
     <color name="colorAccent">#C1FFC1</color>
 
     <color name="recipe_list_item_text_color">#000000</color>
+    <color name="colorGreen">@android:color/holo_green_light</color>
 </resources>

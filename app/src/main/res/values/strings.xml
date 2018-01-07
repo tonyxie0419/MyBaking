@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MyBaking</string>
     <string name="default_recipe_name">Recipe Card</string>
-    <string name="error_message">An error has occurred. Please try again.</string>
+
     <string name="main_title">Baking Time</string>
     <string name="recipe_ingredients">Recipe Ingredients</string>
     <string name="recipe_step_instruction">Recipe Step Instruction</string>
@@ -17,5 +17,8 @@
     <string name="recipe_ingredients_ingredient_default">Nutella or other chocolate-hazelnut spread</string>
 
     <string name="widget_button_previous">Pre</string>
+
+    <string name="error_message">An error has occurred. Please try again.</string>
+    <string name="no_video">此步骤无视频</string>
 
 </resources>

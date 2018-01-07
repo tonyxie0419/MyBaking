@@ -1,6 +1,7 @@
 package com.example.android.mybaking.ui;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import com.example.android.mybaking.BakingService;
 import com.example.android.mybaking.R;
 import com.example.android.mybaking.data.Step;
+import com.example.android.mybaking.utilities.Utils;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.LoadControl;
@@ -46,6 +48,8 @@ public class RecipeDetailInfoFragment extends Fragment {
 
     private SimpleExoPlayerView mPlayerView;
     private SimpleExoPlayer mExoPlayer;
+
+    private TextView noVideoDisplay;
 
     private AudioManager.OnAudioFocusChangeListener mAudioFocusChange;
 
@@ -99,16 +103,47 @@ public class RecipeDetailInfoFragment extends Fragment {
             audioManager.requestAudioFocus(mAudioFocusChange, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
         }
 
-        TextView displayStepInstruction = rootView.findViewById(R.id.tv_recipe_step_instruction);
         mPlayerView = rootView.findViewById(R.id.playerView);
-
-        if (steps != null) {
-            Step currentStep = steps.get(stepIndex);
-            BakingService.startActionUpdateBakingWidgets(getContext(), steps, stepIndex);
-            displayStepInstruction.setText(currentStep.getDescription());
-            String videoUrl = currentStep.getVideoURL();
-            if (!TextUtils.isEmpty(videoUrl)) {
-                initializePlayer(videoUrl);
+        noVideoDisplay = rootView.findViewById(R.id.tv_no_video_display);
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            if (Utils.isPad(getContext())) {
+                TextView displayStepInstruction = rootView.findViewById(R.id.tv_recipe_step_instruction);
+                if (steps != null) {
+                    Step currentStep = steps.get(stepIndex);
+                    BakingService.startActionUpdateBakingWidgets(getContext(), steps, stepIndex);
+                    displayStepInstruction.setText(currentStep.getDescription());
+                    String videoUrl = currentStep.getVideoURL();
+                    if (!TextUtils.isEmpty(videoUrl)) {
+                        showVideo();
+                        initializePlayer(videoUrl);
+                    }
+                }
+            } else {
+                if (steps != null) {
+                    Step currentStep = steps.get(stepIndex);
+                    BakingService.startActionUpdateBakingWidgets(getContext(), steps, stepIndex);
+                    String videoUrl = currentStep.getVideoURL();
+                    if (!TextUtils.isEmpty(videoUrl)) {
+                        showVideo();
+                        initializePlayer(videoUrl);
+                    } else {
+                        showNoVideoDisplay();
+                    }
+                }
+            }
+        } else if (getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE) {
+            TextView displayStepInstruction = rootView.findViewById(R.id.tv_recipe_step_instruction);
+            if (steps != null) {
+                Step currentStep = steps.get(stepIndex);
+                BakingService.startActionUpdateBakingWidgets(getContext(), steps, stepIndex);
+                displayStepInstruction.setText(currentStep.getDescription());
+                String videoUrl = currentStep.getVideoURL();
+                if (!TextUtils.isEmpty(videoUrl)) {
+                    showVideo();
+                    initializePlayer(videoUrl);
+                }else{
+                    showNoVideoDisplay();
+                }
             }
         }
         return rootView;
@@ -163,5 +198,15 @@ public class RecipeDetailInfoFragment extends Fragment {
     public void onPause() {
         super.onPause();
         BakingService.startActionUpdateBakingWidgets(getContext(), steps, stepIndex);
+    }
+
+    private void showNoVideoDisplay() {
+        mPlayerView.setVisibility(View.INVISIBLE);
+        noVideoDisplay.setVisibility(View.VISIBLE);
+    }
+
+    private void showVideo() {
+        mPlayerView.setVisibility(View.VISIBLE);
+        noVideoDisplay.setVisibility(View.INVISIBLE);
     }
 }

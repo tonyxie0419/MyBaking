@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.example.android.mybaking.R;
@@ -22,13 +23,15 @@ import java.util.ArrayList;
  * Created by xie on 2017/12/28.
  */
 
-public class RecipeDetailAdapter extends RecyclerView.Adapter<RecipeDetailAdapter.RecipeDetailAdapterViewHolder> {
+public class RecipeDetailAdapter extends RecyclerView.Adapter<RecipeDetailAdapter.RecipeDetailAdapterViewHolder>{
 
     private static final String TAG = RecipeDetailAdapter.class.getSimpleName();
 
     private Recipe mRecipe;
 
     private Context context;
+    private boolean mTwoPane = false;
+    OnDetailItemClickListener mCallback;
 
     public static final String TRANS_INGREDIENTS = "ingredients";
 
@@ -41,12 +44,17 @@ public class RecipeDetailAdapter extends RecyclerView.Adapter<RecipeDetailAdapte
         mRecipe = recipe;
     }
 
-    public class RecipeDetailAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public interface OnDetailItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public class RecipeDetailAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private TextView mTextView;
 
         public RecipeDetailAdapterViewHolder(View itemView) {
             super(itemView);
+            mCallback = (OnDetailItemClickListener) itemView.getContext();
             mTextView = itemView.findViewById(R.id.tv_recipe_detail_info);
             mTextView.setOnClickListener(this);
         }
@@ -54,23 +62,26 @@ public class RecipeDetailAdapter extends RecyclerView.Adapter<RecipeDetailAdapte
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
-
-            Intent intent = new Intent(context, DetailInfoActivity.class);
-            Bundle bundle = new Bundle();
-            if (position == 0) {
-                ArrayList<Ingredient> ingredients = mRecipe.getIngredients();
-                bundle.putParcelableArrayList(TRANS_INGREDIENTS, ingredients);
+            if (mTwoPane) {
+                mCallback.onItemClick(position);
             } else {
-                //因为第一个位置给了ingredients，所以第二个位置才是步骤的第一步
-                int stepIndex = position - 1;
-                ArrayList<Step> steps = mRecipe.getSteps();
-                bundle.putInt(TRANS_STEP_INDEX, stepIndex);
-                bundle.putParcelableArrayList(TRANS_STEPS, steps);
+                Intent intent = new Intent(context, DetailInfoActivity.class);
+                Bundle bundle = new Bundle();
+                if (position == 0) {
+                    ArrayList<Ingredient> ingredients = mRecipe.getIngredients();
+                    bundle.putParcelableArrayList(TRANS_INGREDIENTS, ingredients);
+                } else {
+                    //因为第一个位置给了ingredients，所以第二个位置才是步骤的第一步
+                    int stepIndex = position - 1;
+                    ArrayList<Step> steps = mRecipe.getSteps();
+                    bundle.putInt(TRANS_STEP_INDEX, stepIndex);
+                    bundle.putParcelableArrayList(TRANS_STEPS, steps);
+                }
+                String recipeName = mRecipe.getRecipeName();
+                bundle.putString(TRANS_RECIPE_NAME, recipeName);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
             }
-            String recipeName = mRecipe.getRecipeName();
-            bundle.putString(TRANS_RECIPE_NAME, recipeName);
-            intent.putExtras(bundle);
-            context.startActivity(intent);
         }
     }
 
@@ -95,5 +106,9 @@ public class RecipeDetailAdapter extends RecyclerView.Adapter<RecipeDetailAdapte
     @Override
     public int getItemCount() {
         return mRecipe.getSteps().size() + 1;
+    }
+
+    public void setTwoPane(boolean isTwoPane) {
+        mTwoPane = isTwoPane;
     }
 }

@@ -12,6 +12,8 @@
     <dimen name="recipe_item_text_size">28sp</dimen>
     <dimen name="progressbar">42dp</dimen>
 
+    <dimen name="no_video_text_size">28sp</dimen>
+
     <dimen name="tv_margin_left">8dp</dimen>
     <dimen name="tv_margin_top">8dp</dimen>
     <dimen name="tv_margin_right">8dp</dimen>
