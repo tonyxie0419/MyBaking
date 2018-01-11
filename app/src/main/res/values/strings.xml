@@ -21,4 +21,7 @@
     <string name="error_message">An error has occurred. Please try again.</string>
     <string name="no_video">此步骤无视频</string>
 
+    <string name="show_on_widget">显示在桌面</string>
+    <string name="show_on_widget_success">已显示在桌面</string>
+
 </resources>

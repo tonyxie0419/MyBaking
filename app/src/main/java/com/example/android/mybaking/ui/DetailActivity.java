@@ -1,5 +1,7 @@
 package com.example.android.mybaking.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v4.app.FragmentManager;
@@ -31,7 +33,7 @@ public class DetailActivity extends AppCompatActivity implements RecipeDetailAda
     private int currentPosition = 0;
     private FragmentManager fragmentManager;
 
-    private final String TRANS_RECIPE = "recipe";
+    private static final String TRANS_RECIPE = "recipe";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,5 +105,11 @@ public class DetailActivity extends AppCompatActivity implements RecipeDetailAda
                     .replace(R.id.recipe_detail_info_container, newRecipeDetailInfoFragment)
                     .commit();
         }
+    }
+
+    public static void startAction(Context context, Recipe recipe) {
+        Intent intent = new Intent(context, DetailActivity.class);
+        intent.putExtra(TRANS_RECIPE, recipe);
+        context.startActivity(intent);
     }
 }

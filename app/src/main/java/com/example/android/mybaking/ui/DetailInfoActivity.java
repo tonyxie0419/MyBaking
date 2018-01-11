@@ -5,10 +5,15 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 
+import com.example.android.mybaking.widget.BakingService;
 import com.example.android.mybaking.R;
 import com.example.android.mybaking.adapter.RecipeDetailAdapter;
 import com.example.android.mybaking.data.Ingredient;
@@ -108,6 +113,25 @@ public class DetailInfoActivity extends AppCompatActivity implements View.OnClic
                 }
                 break;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.recipes, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_show_widget:
+                BakingService.startActionUpdateBakingWidgets(this, steps, stepIndex);
+                Toast.makeText(this, getString(R.string.show_on_widget_success), Toast.LENGTH_SHORT).show();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

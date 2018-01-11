@@ -4,11 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.example.android.mybaking.R;
@@ -23,7 +22,7 @@ import java.util.ArrayList;
  * Created by xie on 2017/12/28.
  */
 
-public class RecipeDetailAdapter extends RecyclerView.Adapter<RecipeDetailAdapter.RecipeDetailAdapterViewHolder>{
+public class RecipeDetailAdapter extends RecyclerView.Adapter<RecipeDetailAdapter.RecipeDetailAdapterViewHolder> {
 
     private static final String TAG = RecipeDetailAdapter.class.getSimpleName();
 
@@ -31,6 +30,7 @@ public class RecipeDetailAdapter extends RecyclerView.Adapter<RecipeDetailAdapte
 
     private Context context;
     private boolean mTwoPane = false;
+
     OnDetailItemClickListener mCallback;
 
     public static final String TRANS_INGREDIENTS = "ingredients";
@@ -48,13 +48,15 @@ public class RecipeDetailAdapter extends RecyclerView.Adapter<RecipeDetailAdapte
         void onItemClick(int position);
     }
 
-    public class RecipeDetailAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class RecipeDetailAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView mTextView;
 
         public RecipeDetailAdapterViewHolder(View itemView) {
             super(itemView);
-            mCallback = (OnDetailItemClickListener) itemView.getContext();
+            if (itemView.getContext() instanceof OnDetailItemClickListener) {
+                mCallback = (OnDetailItemClickListener) itemView.getContext();
+            }
             mTextView = itemView.findViewById(R.id.tv_recipe_detail_info);
             mTextView.setOnClickListener(this);
         }
@@ -63,7 +65,9 @@ public class RecipeDetailAdapter extends RecyclerView.Adapter<RecipeDetailAdapte
         public void onClick(View v) {
             int position = getAdapterPosition();
             if (mTwoPane) {
-                mCallback.onItemClick(position);
+                if (mCallback != null) {
+                    mCallback.onItemClick(position);
+                }
             } else {
                 Intent intent = new Intent(context, DetailInfoActivity.class);
                 Bundle bundle = new Bundle();
@@ -111,4 +115,5 @@ public class RecipeDetailAdapter extends RecyclerView.Adapter<RecipeDetailAdapte
     public void setTwoPane(boolean isTwoPane) {
         mTwoPane = isTwoPane;
     }
+
 }

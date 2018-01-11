@@ -27,7 +27,6 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     private ArrayList<Recipe> recipes;
 
     private Context mContext;
-    private final String TRANS_RECIPE = "recipe";
 
     public RecipeListAdapter(Context context) {
         mContext = context;
@@ -47,10 +46,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         public void onClick(View v) {
             int position = getAdapterPosition();
             Recipe recipe = recipes.get(position);
-
-            Intent intent = new Intent(mContext, DetailActivity.class);
-            intent.putExtra(TRANS_RECIPE, recipe);
-            mContext.startActivity(intent);
+            DetailActivity.startAction(mContext,recipe);
         }
     }
 

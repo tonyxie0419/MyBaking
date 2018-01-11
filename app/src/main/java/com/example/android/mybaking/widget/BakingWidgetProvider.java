@@ -1,4 +1,4 @@
-package com.example.android.mybaking;
+package com.example.android.mybaking.widget;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
 
+import com.example.android.mybaking.R;
 import com.example.android.mybaking.adapter.RecipeDetailAdapter;
 import com.example.android.mybaking.data.Step;
 import com.example.android.mybaking.ui.DetailInfoActivity;

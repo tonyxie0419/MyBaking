@@ -1,6 +1,5 @@
 package com.example.android.mybaking.utilities;
 
-import android.util.Log;
 
 import com.example.android.mybaking.data.Recipe;
 import com.google.gson.Gson;
@@ -20,6 +19,7 @@ public class OpenRecipeJsonUtils {
 
     public static ArrayList<Recipe> getRecipesFromJson(String recipeJsonStr) throws JSONException {
         Gson gson = new Gson();
-        return gson.fromJson(recipeJsonStr, new TypeToken<ArrayList<Recipe>>() {}.getType());
+        return gson.fromJson(recipeJsonStr, new TypeToken<ArrayList<Recipe>>() {
+        }.getType());
     }
 }

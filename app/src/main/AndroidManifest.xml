@@ -35,7 +35,7 @@
                 android:value=".ui.DetailActivity" />
         </activity>
 
-        <receiver android:name=".BakingWidgetProvider">
+        <receiver android:name=".widget.BakingWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -46,7 +46,7 @@
         </receiver>
 
         <service
-            android:name=".BakingService"
+            android:name=".widget.BakingService"
             android:exported="false"></service>
     </application>
 

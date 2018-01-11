@@ -1,16 +1,13 @@
-package com.example.android.mybaking;
+package com.example.android.mybaking.widget;
 
 import android.app.IntentService;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.Context;
-import android.util.Log;
 
 import com.example.android.mybaking.adapter.RecipeDetailAdapter;
-import com.example.android.mybaking.data.Recipe;
 import com.example.android.mybaking.data.Step;
-import com.example.android.mybaking.ui.DetailActivity;
 
 import java.util.ArrayList;
 

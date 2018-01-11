@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.android.mybaking.BakingService;
+import com.example.android.mybaking.widget.BakingService;
 import com.example.android.mybaking.R;
 import com.example.android.mybaking.data.Step;
 import com.example.android.mybaking.utilities.Utils;
